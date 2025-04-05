@@ -273,7 +273,7 @@ exports.login = async (req, res) => {
             }
 
             const jwt_options = {
-                expiresIn: "7d"
+                expiresIn: "7d" 
             }
 
             let token = jwt.sign(payload, process.env.JWT_SECRET, jwt_options);

@@ -40,7 +40,9 @@ export default function Navbar() {
                                         user.type === "User" ?
                                             <li><Link to='/user/dashboard' className="flex items-center justify-center" ><img className="w-8 h-8 rounded-full" src={user.profileImg} alt="" /></Link></li>
                                         :
+                                        user.type === "Seller" ?
                                         <li><Link to='/seller/dashboard' className="flex items-center justify-center" ><img className="w-8 h-8 rounded-full" src={user.profileImg} alt="" /></Link></li>
+                                        :<li><Link to='/caretaker/dashboard' className="flex items-center justify-center" ><img className="w-8 h-8 rounded-full" src={user.profileImg} alt="" /></Link></li>
                                     }
                                     <li><Link to='/cart' className="relative">
                                         <FaShoppingCart fontSize={20}/>

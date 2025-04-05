@@ -1,4 +1,7 @@
+
 export default function ProductOrder({pImg, bgImg, title, desc, price, oldPrice, status}) {
+
+
     return (
         <div className="flex py-2 rounded-lg">
             <div className="relative h-27 flex justify-center w-30">

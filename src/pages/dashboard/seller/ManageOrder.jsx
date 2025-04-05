@@ -6,6 +6,7 @@ import BgPink from "../../../assets/bg-pink.png";
 import DashboardName from "../../../components/DashboardName";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../../config/Context";
+import toast from "react-hot-toast";
 
 export default function ManageOrder() {
 
@@ -24,6 +25,10 @@ export default function ManageOrder() {
             console.log(orders);
         }
     }, [orders])
+
+    function statusUpdate(){
+        toast.success("Status Updated Successfully!!")
+    }
 
     return (
         <div className="container min-h-dvh pt-13">
@@ -51,7 +56,7 @@ discountedPrice} oldPrice={elm.price} status={elm.status} />
                                                 <option value="out_for_delivery">Out for Delivery</option>
                                                 <option value="delivered">Delivered</option>
                                             </select>
-                                            <div className="select-none w-fit px-10 cursor-pointer bg-[#124C5F] text-white text-center font-inter font-semibold text-xs py-2 rounded-sm">Update Status</div>
+                                            <div onClick={statusUpdate} className="select-none w-fit px-10 cursor-pointer bg-[#124C5F] text-white text-center font-inter font-semibold text-xs py-2 rounded-sm">Update Status</div>
                                         </div>
                                     </div>
                                 ))

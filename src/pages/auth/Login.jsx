@@ -78,6 +78,11 @@ export default function Login() {
     }
 
 
+    function continueLoginwithgoogle() {
+        toast.error("Network Error, Please check Internet!!");
+    }
+
+
     return (
         <div className="container min-h-dvh pt-15">
             <div className="container font-staatliches text-3xl text-center mt-10">Log in</div>
@@ -86,7 +91,7 @@ export default function Login() {
                 <div className="">
                     
                     <div className="bg-white py-2 text-sm font-semibold rounded-lg border-1 border-black">
-                        <Link className="container flex items-center justify-center">
+                        <Link onClick={continueLoginwithgoogle} className="container flex items-center justify-center">
                             <img src={GoogleLogo} className="h-4 w-4" alt="" /> <span className="ml-2">Continue with Google</span>
                         </Link>
                     </div>
