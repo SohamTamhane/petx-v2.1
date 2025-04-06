@@ -5,6 +5,9 @@ import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import { Context } from '../../config/Context';
+import { useCookies } from 'react-cookie';
+import SpinnerBtn from '../../components/SpinnerBtn';
+import SpinnerBtnBlack from '../../components/SpinnerBtnBlack';
 
 // Fix for default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -104,11 +107,41 @@ function MapLocation() {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         attribution: '© OpenStreetMap contributors'
     });
-    const [isSharing, setIsSharing] = useState(false);
+    const [isSharing, setIsSharing] = useState(true);
+    const [currentRoom, setCurrentRoom] = useState(null);
     const [roomMembers, setRoomMembers] = useState([]);
     const [showControls, setShowControls] = useState(true);
     const socketRef = useRef(null);
     const mapRef = useRef(null);
+
+    const [cookies, setCookie] = useCookies(['petx']);
+    // const [cookies] = useCookies(['petx']);
+    const [token, setToken] = useState();
+    const [data, setData] = useState();
+    const [userData, setUserData] = useState();
+
+    async function fetchRoomDetails(token, roomId) {
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/room/fetch`,
+            { roomId: roomId },
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+        ).then((res) => {
+            setData(res.data.data);
+        }).catch((error) => {
+            console.log(error.response);
+        })
+    }
+
+    useEffect(() => {
+        if (token && user && user.room) {
+            fetchRoomDetails(token, user.room);
+        }
+    }, [token])
+
+    useEffect(() => {
+        setToken(cookies?.petx);
+    }, [cookies])
 
     // Initialize socket connection
     useEffect(() => {
@@ -123,6 +156,107 @@ function MapLocation() {
             }
         };
     }, []);
+
+    // Get current room members
+    const fetchRoomMembers = async () => {
+        if (!user?.room) return;
+
+        await axios.get(`${import.meta.env.VITE_API_BASE_URL}/room/members`,
+            {
+                headers: { Authorization: `Bearer ${cookies.petx}` }
+            }
+        ).then((res) => {
+            setRoomMembers(res.data.data.filter(member => member._id !== user._id));
+
+        }).catch((error) => {
+            console.log(error.response);
+        })
+
+    };
+
+    const fetchUserDetails = async (id) => {
+        if (!user?.room) return;
+
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/room/user`,
+            { id: id },
+            {
+                headers: { Authorization: `Bearer ${cookies.petx}` }
+            }
+        ).then((res) => {
+            setUserData(res.data.data);
+
+        }).catch((error) => {
+            console.log(error.response);
+        })
+
+    };
+
+    // Fetching User Details
+    useEffect(() => {
+        if (data) {
+            fetchUserDetails(data.room.name);
+        }
+    }, [data])
+
+    // Handle socket events and room state
+    useEffect(() => {
+
+        if (!socketRef.current || !user) return;
+
+        const socket = socketRef.current;
+
+        // Join room if user is in one
+        if (user.room) {
+            fetchRoomDetails(token, user.room);
+            setCurrentRoom(user.room);
+            socket.emit('joinRoom', { roomId: user.room });
+            fetchRoomMembers();
+        } else {
+            setCurrentRoom(null);
+            setRoomMembers([]);
+            setIsSharing(false);
+        }
+
+        // Listen for location updates
+        // const handleLocationUpdate = (data) => {
+        //     console.log(data);
+        //     setRoomMembers(prev => {
+        //         const existingIndex = prev.findIndex(m => m._id === data.userId);
+        //         if (existingIndex >= 0) {
+        //             const updated = [...prev];
+        //             updated[existingIndex] = {
+        //                 ...updated[existingIndex],
+        //                 currentLocation: data.isSharing ? {
+        //                     latitude: data.latitude,
+        //                     longitude: data.longitude
+        //                 } : null
+        //             };
+        //             return updated;
+        //         }
+        //         return prev;
+        //     });
+        // };
+
+        // Listen for member leaving
+        const handleMemberLeft = (userId) => {
+            setRoomMembers(prev => prev.filter(member => member._id !== userId));
+        };
+
+        // Listen for new members joining
+        const handleMemberJoined = (member) => {
+            setRoomMembers(prev => [...prev, member]);
+        };
+
+        // socket.on('locationUpdated', handleLocationUpdate);
+        socket.on('memberLeft', handleMemberLeft);
+        socket.on('memberJoined', handleMemberJoined);
+
+        return () => {
+            // socket.off('locationUpdated', handleLocationUpdate);
+            socket.off('memberLeft', handleMemberLeft);
+            socket.off('memberJoined', handleMemberJoined);
+        };
+    }, [user]);
 
 
     // Track user's position
@@ -140,9 +274,9 @@ function MapLocation() {
                 setPosition(newPos);
                 // setIsLoading(false);
 
-                if (isSharing && user?.room) {
-                    updateLocation(newPos[0], newPos[1]);
-                }
+                // if (isSharing && user?.room) {
+                //     updateLocation(newPos[0], newPos[1]);
+                // }
             },
             (err) => {
                 console.error("Geolocation error:", err);
@@ -156,6 +290,8 @@ function MapLocation() {
             navigator.geolocation.clearWatch(watchId);
         };
     }, [isSharing, user?.room]);
+
+
 
     // Error state
     if (!position) {
@@ -381,6 +517,154 @@ function MapLocation() {
             }
           `}</style>
                 </div>
+
+
+                <div style={{
+                    background: '#f5f5f5',
+                    padding: '15px',
+                    borderRadius: '8px',
+                    marginBottom: '20px'
+                }}>
+                    {
+                        user?.type !== "Caretaker" ?
+                        <h4 style={{ marginBottom: '10px' }}>Caretaker Information</h4>
+                        :<h4 style={{ marginBottom: '10px' }}>User Information</h4>
+                    }
+                    {(roomMembers.length > 0) ? (
+                        <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                            {roomMembers.map(member => (
+                                <div
+                                    key={member._id}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        padding: '8px 12px',
+                                        marginBottom: '8px',
+                                        background: 'white',
+                                        borderRadius: '4px',
+                                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+                                    }}
+                                >
+                                    <div style={{
+                                        width: '36px',
+                                        height: '36px',
+                                        borderRadius: '50%',
+                                        background: '#e0e0e0',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        marginRight: '12px',
+                                        color: '#555',
+                                        fontWeight: 'bold'
+                                    }}>
+                                        {member.username.charAt(0).toUpperCase()}
+                                    </div>
+
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ fontWeight: 'bold' }}>{member.username}</div>
+                                        <div style={{
+                                            fontSize: '12px',
+                                            color: member.currentLocation ? '#4CAF50' : '#9e9e9e'
+                                        }}>
+                                            {member.currentLocation ? 'Currently sharing location' : 'Not sharing location'}
+                                        </div>
+                                    </div>
+
+                                    {member.currentLocation && (
+                                        <button
+                                            onClick={() => {
+                                                if (mapRef.current && member.currentLocation) {
+                                                    mapRef.current.setView([
+                                                        member.currentLocation.latitude,
+                                                        member.currentLocation.longitude
+                                                    ], 15);
+                                                    setShowControls(false);
+                                                }
+                                            }}
+                                            style={{
+                                                // background: '#2196F3',
+                                                // color: 'white',
+                                                // border: 'none',
+                                                // borderRadius: '50%',
+                                                // width: '32px',
+                                                // height: '32px',
+                                                // display: 'flex',
+                                                // alignItems: 'center',
+                                                // justifyContent: 'center',
+                                                // cursor: 'pointer',
+                                                // boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
+                                            }}
+                                            title={`Go to ${member.username}'s location`}
+                                        >
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14l-6-6z" fill="white" />
+                                            </svg>
+                                        </button>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    ) : 
+                    userData ? 
+                    <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                            
+                                <div
+                                    key={userData._id}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        padding: '8px 12px',
+                                        marginBottom: '8px',
+                                        background: 'white',
+                                        borderRadius: '4px',
+                                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+                                    }}
+                                >
+                                    <div style={{
+                                        width: '36px',
+                                        height: '36px',
+                                        borderRadius: '50%',
+                                        background: '#e0e0e0',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        marginRight: '12px',
+                                        color: '#555',
+                                        fontWeight: 'bold'
+                                    }}>
+                                        {userData.username.charAt(0).toUpperCase()}
+                                    </div>
+
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ fontWeight: 'bold' }}>{userData.username}</div>
+                                        <div style={{
+                                            fontSize: '12px',
+                                            // color: member.currentLocation ? '#4CAF50' : '#9e9e9e'
+                                        }}>
+                                            {userData.currentLocation ? 'Currently sharing location' : 'Not sharing location'}
+                                        </div>
+                                    </div>
+
+                                
+                                </div>
+                            
+                        </div>
+                        :
+                    (
+                        <div className='flex items-center text-center justify-center' style={{
+                            textAlign: 'center',
+                            padding: '15px',
+                            background: 'white',
+                            borderRadius: '4px',
+                            color: '#9e9e9e'
+                        }}>
+                            <SpinnerBtnBlack /> <div className='ml-2'>Finding Nearby Caretaker</div>
+                        </div>
+                    )}
+                </div>
+
+
+
 
                 {/* {currentRoom ? (
                     <>

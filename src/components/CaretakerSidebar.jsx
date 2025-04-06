@@ -27,19 +27,19 @@ export default function CaretakerSiderbar({ current }) {
                         <div>View Profile</div>
                     </div>
                     :
-                    <div onClick={()=>navigate('/seller/dashboard')} className="rounded-2xl my-1 px-4 py-2 font-inter flex items-center space-x-2 text-sm cursor-pointer">
+                    <div onClick={()=>navigate('/caretaker/dashboard')} className="rounded-2xl my-1 px-4 py-2 font-inter flex items-center space-x-2 text-sm cursor-pointer">
                         <FaUser />
                         <div>View Profile</div>
                     </div>
             }
             {
-                current == 'orders' ?
+                current == 'rides' ?
                     <div className="bg-[#545353] font-inter my-1 rounded-2xl px-4 py-2 flex items-center space-x-2 text-sm cursor-pointer">
                         <FaBoxOpen />
                         <div>Manage Rides</div>
                     </div>
                     :
-                    <div onClick={()=>navigate('/caretaker/dashboard/order')} className="font-inter my-1 rounded-2xl px-4 py-2 flex items-center space-x-2 text-sm cursor-pointer">
+                    <div onClick={()=>navigate('/caretaker/rides/manage')} className="font-inter my-1 rounded-2xl px-4 py-2 flex items-center space-x-2 text-sm cursor-pointer">
                         <FaBoxOpen />
                         <div>Manage Rides</div>
                     </div>
