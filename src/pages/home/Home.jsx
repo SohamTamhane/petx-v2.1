@@ -10,6 +10,9 @@ import Section3Img1 from "../../assets/section3_img1.png"
 
 import Team1 from "../../assets/team1.jpg"
 import Team2 from "../../assets/team2.png"
+import Team3 from "../../assets/team3.jpeg"
+import Team4 from "../../assets/team4.jpeg"
+import Team5 from "../../assets/team5.jpg"
 
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
@@ -35,11 +38,23 @@ export default function Home() {
 
     const updateSlider = () => {
         if (currentId == "id1") {
-            setSlider({ ...slider, id1: "hidden", id2: "flex" });
+            setSlider({ ...slider, id1: "hidden", id2: "flex", id3: "hidden", id4: "hidden", id5: "hidden" });
             setCurrentId("id2");
         }
+        else if(currentId == "id2"){
+            setSlider({ ...slider, id1: "hidden", id2: "hidden" , id3: "flex", id4: "hidden", id5: "hidden"  });
+            setCurrentId("id3");
+        }
+        else if(currentId == "id3"){
+            setSlider({ ...slider, id1: "hidden", id2: "hidden" , id3: "hidden", id4: "flex", id5: "hidden"});
+            setCurrentId("id4");
+        }
+        else if(currentId == "id4"){
+            setSlider({ ...slider, id1: "hidden", id2: "hidden" , id3: "hidden", id4: "hidden", id5: "flex"});
+            setCurrentId("id5");
+        }
         else {
-            setSlider({ ...slider, id1: "flex", id2: "hidden" });
+            setSlider({ ...slider, id1: "flex", id2: "hidden" , id3: "hidden", id4: "hidden", id5: "hidden"});
             setCurrentId("id1");
         }
     }
@@ -140,6 +155,57 @@ export default function Home() {
                                 <div className="font-inter w-[70%] mb-1 text-sm font-semibold">Full Stack Developer</div>
                                 <div className="font-staatliches text-3xl">Abhijit Abdagire</div>
                                 <div className="font-inter w-[70%] mt-2">As an aspiring Full Stack Developer, I am passionate about crafting secure and innovative web technologies. I am also enthusiastic about developing my management and leadership skills.</div>
+                                <div className="flex space-x-3 mt-3">
+                                    <FaGithub className="cursor-pointer" fontSize={22} />
+                                    <FaInstagram className="cursor-pointer" fontSize={22} />
+                                    <MdEmail className="cursor-pointer" fontSize={22} />
+                                    <FaFacebook className="cursor-pointer" fontSize={22} />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="id3" className={`animate-fade-left animate-delay-none ${slider.id3} w-full container bg-white text-black px-10 py-10 rounded-2xl space-x-15 mt-5`}>
+                            <div>
+                                <img src={Team3} className="rounded-sm w-55 h-40" alt="" />
+                            </div>
+                            <div>
+                                <div className="font-inter w-[70%] mb-1 text-sm font-semibold">Frontend Developer</div>
+                                <div className="font-staatliches text-3xl">Samarth Tapkire</div>
+                                <div className="font-inter w-[70%] mt-2">As an aspiring Frontend Developer, I am passionate about crafting secure and innovative web technologies. I am also enthusiastic about developing my management and leadership skills.</div>
+                                <div className="flex space-x-3 mt-3">
+                                    <FaGithub className="cursor-pointer" fontSize={22} />
+                                    <FaInstagram className="cursor-pointer" fontSize={22} />
+                                    <MdEmail className="cursor-pointer" fontSize={22} />
+                                    <FaFacebook className="cursor-pointer" fontSize={22} />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="id4" className={`animate-fade-left animate-delay-none ${slider.id4} w-full container bg-white text-black px-10 py-10 rounded-2xl space-x-15 mt-5`}>
+                            <div>
+                                <img src={Team4} className="rounded-sm w-55 h-40" alt="" />
+                            </div>
+                            <div>
+                                <div className="font-inter w-[70%] mb-1 text-sm font-semibold">Frontend Developer</div>
+                                <div className="font-staatliches text-3xl">Rohit Patil</div>
+                                <div className="font-inter w-[70%] mt-2">As an aspiring Frontend Developer, I am passionate about crafting secure and innovative web technologies. I am also enthusiastic about developing my management and leadership skills.</div>
+                                <div className="flex space-x-3 mt-3">
+                                    <FaGithub className="cursor-pointer" fontSize={22} />
+                                    <FaInstagram className="cursor-pointer" fontSize={22} />
+                                    <MdEmail className="cursor-pointer" fontSize={22} />
+                                    <FaFacebook className="cursor-pointer" fontSize={22} />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="id5" className={`animate-fade-left animate-delay-none ${slider.id5} w-full container bg-white text-black px-10 py-10 rounded-2xl space-x-15 mt-5`}>
+                            <div>
+                                <img src={Team5} className="rounded-sm w-55 h-40" alt="" />
+                            </div>
+                            <div>
+                                <div className="font-inter w-[70%] mb-1 text-sm font-semibold">Frontend Developer</div>
+                                <div className="font-staatliches text-3xl">Anish Pandat</div>
+                                <div className="font-inter w-[70%] mt-2">As an aspiring Frontend Developer, I am passionate about crafting secure and innovative web technologies. I am also enthusiastic about developing my management and leadership skills.</div>
                                 <div className="flex space-x-3 mt-3">
                                     <FaGithub className="cursor-pointer" fontSize={22} />
                                     <FaInstagram className="cursor-pointer" fontSize={22} />
