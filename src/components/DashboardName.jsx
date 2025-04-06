@@ -5,11 +5,6 @@ export default function DashboardName() {
 
     const {user, userInfo, setUser} = useContext(Context);
 
-    // For Debugging
-    useEffect(()=>{
-        console.log(user);
-    }, [user])
-
     return (
         <div className="flex items-center space-x-3">
             <img className="w-25 rounded-full h-auto" src={user?.profileImg} alt="" />

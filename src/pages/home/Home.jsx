@@ -58,13 +58,13 @@ export default function Home() {
     return (
         <>
             <div className="bg-(--color-bg-home)">
-                <div className="container min-w-full pt-30 min-h-dvh">
-                    <img src={SectionImg1} className="absolute w-[210px] left-5 animate-fade-up" alt="" />
-                    <img src={SectionImg2} className="absolute w-[210px] right-6 animate-fade-up" alt="" />
+                <div className="container min-w-full pt-20 min-h-dvh">
+                    <img src={SectionImg1} className="absolute w-[210px] left-4 animate-fade-up" alt="" />
+                    <img src={SectionImg2} className="absolute w-[210px] right-4 animate-fade-up" alt="" />
                     <img src={SectionImg3} className="absolute w-[170px] bottom-4 left-38 animate-fade-up" alt="" />
                     <img src={SectionImg4} className="absolute w-[170px] bottom-4 right-38 animate-fade-up" alt="" />
                     <div className="min-w-full flex flex-col items-center">
-                        <div className="text-center font-staatliches text-9xl text-wrap w-[65%] animate-fade-up pt-25">
+                        <div className="text-center font-staatliches text-9xl text-wrap w-[65%] animate-fade-up">
                             Where Every Pet's Joy Begins!
                         </div>
                         <div className="text-center font-inter text-lg text-wrap w-[40%] animate-fade-up">
@@ -134,7 +134,7 @@ export default function Home() {
 
                         <div id="id2" className={`animate-fade-left animate-delay-none ${slider.id2} w-full container bg-white text-black px-10 py-10 rounded-2xl space-x-15 mt-5`}>
                             <div>
-                                <img src={Team2} className="rounded-sm w-48 h-45" alt="" />
+                                <img src={Team2} className="rounded-sm w-55 h-40" alt="" />
                             </div>
                             <div>
                                 <div className="font-inter w-[70%] mb-1 text-sm font-semibold">Full Stack Developer</div>

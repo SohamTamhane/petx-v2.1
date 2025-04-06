@@ -28,6 +28,7 @@ import Tracking from "./pages/tracking/Tracking"
 import MapLocation from "./pages/tracking/MapLocation"
 import CaretakerDashborad from "./pages/dashboard/caretaker/CaretakerDashborad"
 import ManagePets from "./pages/dashboard/user/ManagePets"
+import ManageRides from "./pages/dashboard/caretaker/ManageRides"
 
 function App() {
     return (
@@ -63,6 +64,7 @@ function App() {
                         <Route path="/seller/dashboard/analytics" element={<ViewAnalytics />} />
 
                         <Route path="/caretaker/dashboard" element={<CaretakerDashborad/>}/>
+                        <Route path="/caretaker/rides/manage" element={<ManageRides/>}/>
 
 
                         <Route path="/healthcare" element={<Healthcare />} />
