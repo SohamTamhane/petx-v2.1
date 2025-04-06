@@ -62,7 +62,7 @@ export default function ManageProducts() {
             descRef.current.disabled = true;
             priceRef.current.disabled = true;
             oldPriceRef.current.disabled = true;
-            stockRef.current.disabled = true;
+            stockRef.current.disabled = true;   
             categoryRef.current.disabled = true;
             selectedFileRef.current.disabled = true;
 
