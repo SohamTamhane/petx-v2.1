@@ -27,23 +27,24 @@ cloudinaryConnect();
 
 const PORT = process.env.PORT || 8080;
 
-// Import routes
-import AuthRoutes from './routes/Auth.js';
-import UserRoutes from './routes/User.js';
-import SellerRoutes from './routes/Seller.js';
-import MarketplaceRoutes from './routes/Marketplace.js';
-import PaymentRoutes from './routes/Payment.js';
-import RoomRoutes from './routes/Room.js';
-
-// Set up API routes
-app.use('/api/v2/auth', AuthRoutes);
-app.use('/api/v2/user', UserRoutes);
-app.use('/api/v2/seller', SellerRoutes);
-app.use('/api/v2/market', MarketplaceRoutes);
-app.use('/api/v2/payment', PaymentRoutes);
-app.use('/api/v2/room', RoomRoutes);
-
 // Health check route
+=======
+const AuthRoutes = require('./routes/Auth');
+const UserRoutes = require('./routes/User');
+const SellerRoutes = require('./routes/Seller');
+const MarketplaceRoutes = require('./routes/Marketplace');
+const PaymentRoutes = require('./routes/Payment');
+const RoomRoutes = require('./routes/Room');
+const AdoptRoutes = require('./routes/Adoption');
+
+app.use("/api/v2/auth", AuthRoutes);
+app.use("/api/v2/user", UserRoutes);
+app.use("/api/v2/seller", SellerRoutes);
+app.use("/api/v2/market", MarketplaceRoutes);
+app.use("/api/v2/payment", PaymentRoutes);
+app.use("/api/v2/room", RoomRoutes);
+app.use("/api/v2/adopt", AdoptRoutes);
+
 const router = express.Router();
 router.get('/', (req, res) => {
   res.json({

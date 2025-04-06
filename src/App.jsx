@@ -29,6 +29,8 @@ import MapLocation from "./pages/tracking/MapLocation"
 import CaretakerDashborad from "./pages/dashboard/caretaker/CaretakerDashborad"
 import ManagePets from "./pages/dashboard/user/ManagePets"
 import ManageRides from "./pages/dashboard/caretaker/ManageRides"
+import Adoption from "./pages/adoption/adoption"
+import PetAdoptionForm from "./components/PetAdoptionForm"
 
 function App() {
     return (
@@ -70,6 +72,8 @@ function App() {
                         <Route path="/healthcare" element={<Healthcare />} />
                         <Route path="/tracking" element={<Tracking />} />
                         <Route path="/tracking/map" element={<MapLocation />} />
+                        <Route path="/adoption" element={<Adoption/>}/>
+                        <Route path="/adoption/petadoptionform" element={<PetAdoptionForm/>} />
                         
                         <Route path="*" element={<Error />} />
                     </Routes>
