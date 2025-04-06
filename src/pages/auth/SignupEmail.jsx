@@ -70,6 +70,7 @@ export default function SignupEmail() {
         //   }).catch((error)=>{
         //     toast.error(error.response.data.message);
         //   })
+            toast.error("Network Error, Please check Internet!!");
         } catch (error) {
             console.log(error);
             toast.error("Error During Login");
@@ -84,7 +85,7 @@ export default function SignupEmail() {
                 <div className="">
 
                     <div className="bg-white py-2 text-sm font-semibold rounded-lg border-1 border-black">
-                        <button onClick={handleGoogleRegister} className="container flex items-center justify-center">
+                        <button onClick={handleGoogleRegister} className="container flex items-center justify-center cursor-pointer">
                             <img src={GoogleLogo} className="h-4 w-4" alt="" /> <span className="ml-2">Continue with Google</span>
                         </button>
                     </div>

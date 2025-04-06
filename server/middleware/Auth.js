@@ -54,3 +54,24 @@ exports.isSeller = async (req, res, next) => {
         })
     }
 }
+
+exports.isCaretaker = async (req, res, next) =>{
+    try{
+        const user = req.user;
+        if (user.type == "Caretaker") {
+            next();
+        }
+        else{
+            return res.status(401).json({
+                success: false,
+                message: "User is not a Caretaker"
+            })
+        }
+    }
+    catch(error){
+        return res.status(401).json({
+            success:false,
+            message: "Something went wrong while verifing the token"
+        })
+    }
+}

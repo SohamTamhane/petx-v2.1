@@ -76,14 +76,14 @@ exports.becomeCaretaker = async (req, res) => {
             })
         }
 
-        const userDetails = await User.findOneAndUpdate({ email: user.email }, { type: "Caretaker" })
+        const userDetails = await User.findOneAndUpdate({ email: user.email }, { type: "Caretaker" });
 
         const payload = {
             id: user.id,
             type: "Caretaker",
             email: user.email,
             username: user.username,
-            verified: user.verified
+            verified: user.verified,
         }
 
         const jwt_options = {
@@ -95,7 +95,7 @@ exports.becomeCaretaker = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "User Details Updated Successfully !!",
-            token: token
+            token: token,
         })
     }
     catch (error) {
@@ -106,6 +106,37 @@ exports.becomeCaretaker = async (req, res) => {
         })
     }
 }
+
+exports.updateDetails = async (req, res) => {
+    try{
+        const {cost} = req.body;    
+        const user = req.user;
+
+        // if(typeof cost !== 'number' || cost < 0){
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: "Please provide a valid cost"
+        //     })
+        // }
+
+        const userDetails = await User.findOneAndUpdate({_id: user.id}, {cost: cost});
+        return res.status(200).json({
+            success: true,
+            message: "User Details Updated Successfully !!",
+            user: userDetails
+        })
+
+    }
+    catch(error){
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error!!",
+            error: error.message
+        })
+    }
+
+}
+
 
 exports.updateAddress = async (req, res) => {
     try {

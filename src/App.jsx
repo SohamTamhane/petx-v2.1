@@ -26,6 +26,7 @@ import Healthcare from "./pages/healthcare/Healthcare"
 import AppContext from "./config/Context"
 import Tracking from "./pages/tracking/Tracking"
 import MapLocation from "./pages/tracking/MapLocation"
+import CaretakerDashborad from "./pages/dashboard/caretaker/CaretakerDashborad"
 
 function App() {
     return (
@@ -58,6 +59,8 @@ function App() {
                         <Route path="/seller/dashboard/order" element={<ManageOrder />} />
                         <Route path="/seller/dashboard/product" element={<ManageProducts />} />
                         <Route path="/seller/dashboard/analytics" element={<ViewAnalytics />} />
+
+                        <Route path="/caretaker/dashboard" element={<CaretakerDashborad/>}/>
 
 
                         <Route path="/healthcare" element={<Healthcare />} />

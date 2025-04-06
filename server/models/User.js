@@ -30,6 +30,9 @@ const userSchema = new mongoose.Schema({
         enum: ["User", "Seller", "Caretaker"],
         required: true
     },
+    cost:{
+        type: Number,
+    },
     profileImg: {
         type: String,
         required: true
