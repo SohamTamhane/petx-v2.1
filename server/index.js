@@ -29,6 +29,7 @@ const SellerRoutes = require('./routes/Seller');
 const MarketplaceRoutes = require('./routes/Marketplace');
 const PaymentRoutes = require('./routes/Payment');
 const RoomRoutes = require('./routes/Room');
+const AdoptRoutes = require('./routes/Adoption');
 
 app.use("/api/v2/auth", AuthRoutes);
 app.use("/api/v2/user", UserRoutes);
@@ -36,6 +37,7 @@ app.use("/api/v2/seller", SellerRoutes);
 app.use("/api/v2/market", MarketplaceRoutes);
 app.use("/api/v2/payment", PaymentRoutes);
 app.use("/api/v2/room", RoomRoutes);
+app.use("/api/v2/adopt", AdoptRoutes);
 
 const router = express.Router();
 router.get('/', (req, res) => {

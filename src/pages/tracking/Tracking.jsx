@@ -4,6 +4,7 @@ import { Context } from "../../config/Context";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 function Tracking() {
 
@@ -37,6 +38,7 @@ function Tracking() {
     }
 
     return (
+       <>
         <div className="container min-h-dvh pt-20">
             <div>
                 <div className="container font-staatliches text-6xl text-center mt-6">Hire a Caretaker</div>
@@ -64,6 +66,8 @@ function Tracking() {
                 </div>
             </div>
         </div>
+        <Footer/>
+       </>
     )
 }
 
