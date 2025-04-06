@@ -11,7 +11,7 @@ const profileSchema = new mongoose.Schema({
     pets: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Pet"
+            ref: "Pets"
         }
     ],
     products: [
@@ -39,7 +39,7 @@ const profileSchema = new mongoose.Schema({
     adoption: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Pet"
+            ref: "Pets"
         }
     ],
     address: {

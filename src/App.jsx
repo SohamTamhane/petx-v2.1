@@ -25,6 +25,7 @@ import ViewAnalytics from "./pages/dashboard/seller/ViewAnalytics"
 import Healthcare from "./pages/healthcare/Healthcare"
 import AppContext from "./config/Context"
 import CaretakerDashborad from "./pages/dashboard/caretaker/CaretakerDashborad"
+import ManagePets from "./pages/dashboard/user/ManagePets"
 
 function App() {
     return (
@@ -52,6 +53,7 @@ function App() {
                         <Route path="/user/dashboard" element={<Dashboard />} />
                         <Route path="/user/dashboard/order" element={<UserOrders />} />
                         <Route path="/user/dashboard/settings" element={<Setting />} />
+                        <Route path="/user/dashboard/managepets" element={<ManagePets/>}/>
 
                         <Route path="/seller/dashboard" element={<SellerDashboard />} />
                         <Route path="/seller/dashboard/order" element={<ManageOrder />} />

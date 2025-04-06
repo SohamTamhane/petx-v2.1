@@ -51,12 +51,12 @@ export default function UserSidebar({ current }) {
                 current == 'manage_pet' ?
                     <div className="bg-[#545353] font-inter my-1 rounded-2xl px-4 py-2 flex items-center space-x-2 text-sm cursor-pointer">
                         <FaShieldDog />
-                        <div>Manage Pet</div>
+                        <div>Manage Pets</div>
                     </div>
                     :
-                    <div className="font-inter my-1 rounded-2xl px-4 py-2 flex items-center space-x-2 text-sm cursor-pointer">
+                    <div onClick={()=>navigate('/user/dashboard/managepets')} className="font-inter my-1 rounded-2xl px-4 py-2 flex items-center space-x-2 text-sm cursor-pointer">
                         <FaShieldDog />
-                        <div>Manage Pet</div>
+                        <div>Manage Pets</div>
                     </div>
             }
             <hr className="my-3" />

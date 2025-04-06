@@ -19,7 +19,7 @@ export default function CaretakerSiderbar({ current }) {
 
     return (
         <div className="bg-[#27221F] text-white w-[250px] h-[100%] fixed px-2 py-3 select-none">
-            <div className="font-staatliches text-xl text-center my-5">Caretaker Dashboard</div>
+            <div className="font-staatliches text-xl text-center my-5 text-green-500">Caretaker Dashboard</div>
             {
                 current == 'profile' ?
                     <div className="bg-[#545353] rounded-2xl my-1 px-4 py-2 font-inter flex items-center space-x-2 text-sm cursor-pointer">
