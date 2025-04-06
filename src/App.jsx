@@ -24,6 +24,8 @@ import ManageProducts from "./pages/dashboard/seller/ManageProducts"
 import ViewAnalytics from "./pages/dashboard/seller/ViewAnalytics"
 import Healthcare from "./pages/healthcare/Healthcare"
 import AppContext from "./config/Context"
+import Tracking from "./pages/tracking/Tracking"
+import MapLocation from "./pages/tracking/MapLocation"
 
 function App() {
     return (
@@ -59,6 +61,8 @@ function App() {
 
 
                         <Route path="/healthcare" element={<Healthcare />} />
+                        <Route path="/tracking" element={<Tracking />} />
+                        <Route path="/tracking/map" element={<MapLocation />} />
                         
                         <Route path="*" element={<Error />} />
                     </Routes>

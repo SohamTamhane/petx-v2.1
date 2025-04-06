@@ -37,7 +37,11 @@ const userSchema = new mongoose.Schema({
     profile: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "UserProfile"
-    }
+    },
+    room: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Room',
+      },
 })
 
 module.exports = mongoose.model("User", userSchema);

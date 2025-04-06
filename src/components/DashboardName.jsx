@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../config/Context";
 
 export default function DashboardName() {
 
-    const {user, setUser} = useContext(Context);
+    const {user, userInfo, setUser} = useContext(Context);
+
+    // For Debugging
+    useEffect(()=>{
+        console.log(user);
+    }, [user])
 
     return (
         <div className="flex items-center space-x-3">
