@@ -31,6 +31,7 @@ export default function Navbar() {
                         <li><Link to='/marketplace'>Marketplace</Link></li>
                         <li><Link to='/healthcare'>Healthcare</Link></li>
                         <li><Link to='/tracking'>Tracking</Link></li>
+                        <li><Link to='/tracking/map'>Map</Link></li>
                         <li><Link to='/adoption'>Adoption</Link></li>
                         {
                             user ? 
