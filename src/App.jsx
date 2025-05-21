@@ -31,6 +31,7 @@ import ManagePets from "./pages/dashboard/user/ManagePets"
 import ManageRides from "./pages/dashboard/caretaker/ManageRides"
 import Adoption from "./pages/adoption/adoption"
 import PetAdoptionForm from "./components/PetAdoptionForm"
+import DeploymentTest from "./pages/DeploymentTest"
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function App() {
                     <Navbar />
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/petx-v2.1" element={<DeploymentTest />} />
                         <Route path="/auth/login" element={<Login />} />
                         <Route path="/auth/signup" element={<SignupEmail />} />
                         <Route path="/auth/signup/details" element={<SignupDetails />} />
