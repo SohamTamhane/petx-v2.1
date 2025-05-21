@@ -94,7 +94,7 @@ export default function Home() {
                     <div className="container flex justify-center mt-7 space-x-10">
                         <div className="cursor-pointer flex flex-col py-5 items-center justify-center container w-40 border-black border-2 rounded-xl">
                             <img className="w-auto h-25" src={Section2Img1} alt="" />
-                            <div className="font-inter text-center mt-2 text-base font-semibold">Markerplace</div>
+                            <div className="font-inter text-center mt-2 text-base font-semibold">Marketplace</div>
                         </div>
                         <div className="cursor-pointer flex flex-col py-5 items-center justify-center container w-40 border-black border-2 rounded-xl">
                             <img className="w-auto h-25" src={Section2Img2} alt="" />

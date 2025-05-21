@@ -47,7 +47,7 @@ export default function Healthcare() {
             const msg = prompt;
             setPrompt("");
             await axios.post('https://openrouter.ai/api/v1/chat/completions', {
-                "model": "qwen/qwen-vl-plus:free",
+                "model": "meta-llama/llama-3.3-8b-instruct:free",
                 "messages": [
                     {
                         "role": "user",

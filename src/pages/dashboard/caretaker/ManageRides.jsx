@@ -42,6 +42,7 @@ export default function ManageRides() {
                 headers: { Authorization: `Bearer ${token}` }
             }
         ).then((res) => {
+            console.log(res.data);
             setData(res.data.data);
             // console.log(res.data.data);
         }).catch((error) => {

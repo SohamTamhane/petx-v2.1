@@ -28,7 +28,9 @@ exports.createRoom = async (req, res) => {
         const room = await Room.create({ name: user.id, cost: cost, duration: duration });
 
         await User.findByIdAndUpdate(user.id, { room: room._id });
-        await User.findOneAndUpdate({ type: "Caretaker" }, { room: room._id });
+        // await User.findOneAndUpdate({ type: "Caretaker" }, { room: room._id });
+        
+        await User.updateMany({ type: "Caretaker" }, { room: room._id });
 
         //   const room = new Room({
         //     name,
