@@ -5,8 +5,8 @@ We know your pets are cherished members of your family. That's why we provide lo
 
 ## Installation
 ```
-git clone https://github.com/SohamTamhane/petx-v2.git
-cd petx-v2
+git clone https://github.com/SohamTamhane/petx-v2.1.git
+cd petx-v2.1
 npm i
 
 ```
